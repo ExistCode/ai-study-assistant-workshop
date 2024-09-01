@@ -6,6 +6,7 @@ import { SearchResult, SearchResultProps } from '../SearchResult'
 // Import icons
 import { BsFileEarmarkMusicFill, BsFileEarmarkPlayFill } from 'react-icons/bs'
 import { FaFileAlt, FaFilePdf, FaImage } from 'react-icons/fa'
+import { Button } from '../Buttons/Button'
 
 export type SearchProps = {
   query?: string
@@ -61,48 +62,36 @@ export const Search: React.FC<SearchProps> = ({
 
       {/* Row of Buttons */}
       <div className="flex justify-center space-x-4 mb-4 pb-2">
-        <button
-          className="flex items-center space-x-2 p-2 border rounded-large shadow-md hover:bg-gray-200"
+        <Button
+          label="Docs"
+          icon={<FaFileAlt color="blue" />}
           onClick={() => handleFilterChange('document')}
-        >
-          <FaFileAlt color="blue" />
-          <span>Docs</span>
-        </button>
-        <button
-          className="flex items-center space-x-2 p-2 border rounded-large shadow-md hover:bg-gray-200"
+        />
+        <Button
+          label="PDF"
+          icon={<FaFilePdf color="red" />}
           onClick={() => handleFilterChange('pdf')}
-        >
-          <FaFilePdf color="red" />
-          <span>PDF</span>
-        </button>
-        <button
-          className="flex items-center space-x-2 p-2 border rounded-large shadow-md hover:bg-gray-200"
+        />
+        <Button
+          label="Images"
+          icon={<FaImage color="#fe5a55" />}
           onClick={() => handleFilterChange('image')}
-        >
-          <FaImage color="#fe5a55" />
-          <span>Images</span>
-        </button>
-        <button
-          className="flex items-center space-x-2 p-2 border rounded-large shadow-md hover:bg-gray-200"
+        />
+        <Button
+          label="MP3/Audio"
+          icon={<BsFileEarmarkMusicFill color="orange" />}
           onClick={() => handleFilterChange('audio')}
-        >
-          <BsFileEarmarkMusicFill color="orange" />
-          <span>MP3/Audio</span>
-        </button>
-        <button
-          className="flex items-center space-x-2 p-2 border rounded-large shadow-md hover:bg-gray-200"
+        />
+        <Button
+          label="MP4/Video"
+          icon={<BsFileEarmarkPlayFill color="#8ba3fe" />}
           onClick={() => handleFilterChange('video')}
-        >
-          <BsFileEarmarkPlayFill color="#8ba3fe" />
-          <span>MP4/Video</span>
-        </button>
-        <button
-          className="ml-auto space-x-2 p-2 border rounded-large shadow-md hover:bg-gray-300"
+        />
+        <Button
+          label="Clear Filter"
+          icon={null}
           onClick={() => handleFilterChange('')}
-        >
-          {' '}
-          Clear Filter
-        </button>
+        />
       </div>
 
       <div>
