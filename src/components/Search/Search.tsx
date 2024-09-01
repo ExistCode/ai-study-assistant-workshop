@@ -3,6 +3,9 @@ import { SearchBar } from '@/components/SearchBar'
 import clsx from 'clsx'
 import React from 'react'
 import { SearchResult, SearchResultProps } from '../SearchResult'
+// Import icons
+import { BsFileEarmarkMusicFill, BsFileEarmarkPlayFill } from 'react-icons/bs'
+import { FaFileAlt, FaFilePdf, FaImage } from 'react-icons/fa'
 
 export type SearchProps = {
   query?: string
@@ -43,6 +46,31 @@ export const Search: React.FC<SearchProps> = ({
           onSearch && onSearch(query || '')
         }}
       />
+
+      {/* Row of Buttons */}
+      <div className="flex justify-center space-x-4 mb-4 pb-2">
+        <button className="flex items-center space-x-2 p-2 border rounded-large shadow-md hover:bg-gray-200">
+          <FaFileAlt color="blue" />
+          <span>Docs</span>
+        </button>
+        <button className="flex items-center space-x-2 p-2 border rounded-large shadow-md hover:bg-gray-200">
+          <FaFilePdf color="red" />
+          <span>PDF</span>
+        </button>
+        <button className="flex items-center space-x-2 p-2 border rounded-large shadow-md hover:bg-gray-200">
+          <FaImage color="#fe5a55" />
+          <span>Images</span>
+        </button>
+        <button className="flex items-center space-x-2 p-2 border rounded-large shadow-md hover:bg-gray-200">
+          <BsFileEarmarkMusicFill color="orange" />
+          <span>MP3/Audio</span>
+        </button>
+        <button className="flex items-center space-x-2 p-2 border rounded-large shadow-md hover:bg-gray-200">
+          <BsFileEarmarkPlayFill color="#8ba3fe" />
+          <span>MP4/Video</span>
+        </button>
+      </div>
+
       <div>
         {typeof results !== 'undefined' && (
           <SearchResult
