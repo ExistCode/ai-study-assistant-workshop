@@ -1,7 +1,7 @@
 import { AnimatedText } from '@/components/AnimatedText'
 import { SearchBar } from '@/components/SearchBar'
 import clsx from 'clsx'
-import React from 'react'
+import React, { useState } from 'react'
 import { SearchResult, SearchResultProps } from '../SearchResult'
 // Import icons
 import { BsFileEarmarkMusicFill, BsFileEarmarkPlayFill } from 'react-icons/bs'
@@ -31,6 +31,18 @@ export const Search: React.FC<SearchProps> = ({
   onSelect,
   compact,
 }) => {
+  const [fileTypeFilter, setFileTypeFilter] = useState<string | null>(null)
+
+  // Handle filter button function
+  const handleFilterChange = (type: string | null) => {
+    setFileTypeFilter(type)
+  }
+
+  // Filter the results based on the selected filter type
+  const filteredResults = fileTypeFilter
+    ? results?.filter((file) => file.type === fileTypeFilter)
+    : results
+
   return (
     <div className="flex flex-col">
       <SearchBar
@@ -49,25 +61,47 @@ export const Search: React.FC<SearchProps> = ({
 
       {/* Row of Buttons */}
       <div className="flex justify-center space-x-4 mb-4 pb-2">
-        <button className="flex items-center space-x-2 p-2 border rounded-large shadow-md hover:bg-gray-200">
+        <button
+          className="flex items-center space-x-2 p-2 border rounded-large shadow-md hover:bg-gray-200"
+          onClick={() => handleFilterChange('document')}
+        >
           <FaFileAlt color="blue" />
           <span>Docs</span>
         </button>
-        <button className="flex items-center space-x-2 p-2 border rounded-large shadow-md hover:bg-gray-200">
+        <button
+          className="flex items-center space-x-2 p-2 border rounded-large shadow-md hover:bg-gray-200"
+          onClick={() => handleFilterChange('pdf')}
+        >
           <FaFilePdf color="red" />
           <span>PDF</span>
         </button>
-        <button className="flex items-center space-x-2 p-2 border rounded-large shadow-md hover:bg-gray-200">
+        <button
+          className="flex items-center space-x-2 p-2 border rounded-large shadow-md hover:bg-gray-200"
+          onClick={() => handleFilterChange('image')}
+        >
           <FaImage color="#fe5a55" />
           <span>Images</span>
         </button>
-        <button className="flex items-center space-x-2 p-2 border rounded-large shadow-md hover:bg-gray-200">
+        <button
+          className="flex items-center space-x-2 p-2 border rounded-large shadow-md hover:bg-gray-200"
+          onClick={() => handleFilterChange('audio')}
+        >
           <BsFileEarmarkMusicFill color="orange" />
           <span>MP3/Audio</span>
         </button>
-        <button className="flex items-center space-x-2 p-2 border rounded-large shadow-md hover:bg-gray-200">
+        <button
+          className="flex items-center space-x-2 p-2 border rounded-large shadow-md hover:bg-gray-200"
+          onClick={() => handleFilterChange('video')}
+        >
           <BsFileEarmarkPlayFill color="#8ba3fe" />
           <span>MP4/Video</span>
+        </button>
+        <button
+          className="ml-auto space-x-2 p-2 border rounded-large shadow-md hover:bg-gray-300"
+          onClick={() => handleFilterChange('')}
+        >
+          {' '}
+          Clear Filter
         </button>
       </div>
 
@@ -94,7 +128,7 @@ export const Search: React.FC<SearchProps> = ({
             }
             selected={selectedFiles}
             onSelect={onSelect}
-            files={results}
+            files={filteredResults}
             hideList={compact}
             compactOverview={compact}
           />
