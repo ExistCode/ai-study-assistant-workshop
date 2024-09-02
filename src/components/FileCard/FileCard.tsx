@@ -18,13 +18,14 @@ export type FileCardProps = {
   itemProps?: Partial<AccordionItemProps>
 } & Partial<AccordionProps>
 
-export const FileCard: React.FC<FileCardProps> = ({
+export const FileCard: React.FC<FileCardProps & { itemPath?: string }> = ({
   name,
   extension,
   icon,
   tags,
   excerpt,
   itemProps = {},
+  itemPath,
   ...props
 }) => {
   const displayName =
@@ -71,6 +72,37 @@ export const FileCard: React.FC<FileCardProps> = ({
     </div>
   )
 
+  const previewContent = (itemPath?: string) => {
+    switch (extension?.toLowerCase()) {
+      case '.jpg':
+      case '.png':
+      case '.gif':
+      case '.jpeg':
+        return (
+          <img
+            src={itemPath}
+            alt={name}
+            width={400}
+            height={320}
+            style={{ maxWidth: '100%', maxHeight: '200px' }}
+          />
+        )
+      case '.mp4':
+      case '.mov':
+      case '.avi':
+        return (
+          <video
+            src={`/api/placeholder/${400}/${320}`}
+            controls
+            width={400}
+            height={320}
+          />
+        )
+      default:
+        return null
+    }
+  }
+
   return (
     <Accordion>
       <AccordionItem
@@ -80,7 +112,8 @@ export const FileCard: React.FC<FileCardProps> = ({
         startContent={startContent}
         key={1}
       >
-        <div>Additional content goes here.</div>
+        {previewContent(itemPath)}
+        {/* {itemPath && <img src={itemPath} alt={name} className="file-image" />} */}
       </AccordionItem>
     </Accordion>
   )

@@ -33,6 +33,7 @@ export const searchApi = async ({
       'autoKeywords',
       'path',
       'ext',
+      'url',
     ),
     unbody.get.audioFile.select(
       '__typename',
@@ -48,6 +49,7 @@ export const searchApi = async ({
       'autoTypes',
       'path',
       'ext',
+      'url',
     ),
   ]
     .map((q) => q.additional('id').limit(10))
@@ -76,6 +78,7 @@ export const searchApi = async ({
         autoCaption,
         autoSummary,
         autoTypes,
+        url,
       } = file
 
       let type: FileData['type'] = 'document'
@@ -105,6 +108,7 @@ export const searchApi = async ({
           id: _additional.id,
           __typename: __typename,
         },
+        url: type === 'image' || type === 'audio' ? url : '',
       })
     })
 

@@ -162,7 +162,9 @@ export const SearchResult: React.FC<SearchResultProps> = ({
 
               {filesGroup.map((item, index) => {
                 const IconComponent = iconMap[item.type]
-
+                console.log(item.url)
+                const itemPath =
+                  item.type === 'image' || item.type === 'video' ? item.url : '' // Join the path for images
                 return (
                   <div key={index}>
                     <div className={clsx('flex flex-row items-center')}>
@@ -184,6 +186,7 @@ export const SearchResult: React.FC<SearchResultProps> = ({
                         }}
                         icon={<IconComponent />}
                         extension={item.extension || ''}
+                        itemPath={itemPath}
                       />
                     </div>
                   </div>
