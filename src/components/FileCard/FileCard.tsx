@@ -90,14 +90,7 @@ export const FileCard: React.FC<FileCardProps & { itemPath?: string }> = ({
       case '.mp4':
       case '.mov':
       case '.avi':
-        return (
-          <video
-            src={`/api/placeholder/${400}/${320}`}
-            controls
-            width={400}
-            height={320}
-          />
-        )
+        return <video src={itemPath} controls width={400} height={320} />
       default:
         return null
     }
@@ -113,7 +106,6 @@ export const FileCard: React.FC<FileCardProps & { itemPath?: string }> = ({
         key={1}
       >
         {previewContent(itemPath)}
-        {/* {itemPath && <img src={itemPath} alt={name} className="file-image" />} */}
       </AccordionItem>
     </Accordion>
   )
