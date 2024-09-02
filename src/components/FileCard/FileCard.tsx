@@ -1,3 +1,4 @@
+'use client'
 import {
   Accordion,
   AccordionItem,
@@ -71,15 +72,16 @@ export const FileCard: React.FC<FileCardProps> = ({
   )
 
   return (
-    <Accordion selectedKeys={[]} isCompact {...props}>
+    <Accordion>
       <AccordionItem
-        disableAnimation
-        hideIndicator
         title={title}
         subtitle={subtitle}
         {...itemProps}
         startContent={startContent}
-      ></AccordionItem>
+        key={1}
+      >
+        <div>Additional content goes here.</div>
+      </AccordionItem>
     </Accordion>
   )
 }
